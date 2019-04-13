@@ -1,4 +1,5 @@
 from main import *
+import time
 
 
 def garbarino_crawl(url, settings):
@@ -23,7 +24,7 @@ def garbarino_crawl(url, settings):
             except IndexError:
                 products["discount_price"] = None
             print(products)
-            csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
+            #csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
         # Try clicking next page element
         try:    # TODO simplify xpath
             chrome_driver.find_elements_by_xpath("/html/body/div[4]/div[3]/div[2]/nav/ul/li[4]/a")[0].click()
@@ -33,12 +34,10 @@ def garbarino_crawl(url, settings):
 
 
 start_time = time.time()
-print("Garbarino")
-csvfile = open("garbarinoReport.csv", "a")
-csvfile.write(GARBARINO_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
-csvfile.close()
+#csvfile = open("garbarinoReport.csv", "a")
+#csvfile.write(GARBARINO_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
+#csvfile.close()
 for section in GARBARINO_WEBSITE_SECTIONS:
     garbarino_crawl(GARBARINO_WEBSITE+section, GARBARINO_CRAWLER_SETTINGS)
 
-elapsed_time = time.time() - start_time
-print(elapsed_time)
+print("Finished Garbarino")

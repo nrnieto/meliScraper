@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-echo "scraping"
-python3 scrapFravega.py &
-python3 scrapGarbarino.py &
-echo "finished"
+echo "Starting to scrap fravega and garbarino"
+time python3 scrapFravega.py &
+time python3 scrapGarbarino.py &

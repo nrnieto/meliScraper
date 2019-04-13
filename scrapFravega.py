@@ -1,4 +1,5 @@
 from main import *
+import time
 
 
 def fravega_crawl(url, settings):
@@ -19,8 +20,8 @@ def fravega_crawl(url, settings):
             except IndexError:
                 products["discount_price"] = None
             print(products)
-            csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
-        # Check if next page element existst
+            #csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
+        # Check if next page element exists
         if not check_if_element_exists_by_class_name("ant-pagination-disabled", chrome_driver):
             try:
                 # Try clicking it
@@ -35,9 +36,10 @@ def fravega_crawl(url, settings):
 
 
 start_time = time.time()
-print("Fravega")
-csvfile = open("fravegaReport.csv", "a")
-csvfile.write(FRAVEGA_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
-csvfile.close()
+#csvfile = open("fravegaReport.csv", "a")
+#csvfile.write(FRAVEGA_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
+#csvfile.close()
 for section in FRAVEGA_WEBSITE_SECTIONS:
     fravega_crawl(FRAVEGA_WEBSITE+section, FRAVEGA_CRAWLER_SETTINGS)
+
+print("Finished Garbarino")

@@ -1,18 +1,11 @@
 """ TODO Docstring """
 
 import os
-import string
-import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, \
     WebDriverException, StaleElementReferenceException, ElementNotVisibleException
 from selenium.webdriver.chrome.options import Options
-from bs4 import BeautifulSoup
-import time
 from settings import *
-import csv
-from multiprocessing import Pool, cpu_count
-import datetime
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 

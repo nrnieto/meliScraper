@@ -31,15 +31,5 @@ def check_if_element_exists_by_class_name(class_name, chrome_driver):
     return False
 
 
-def initialize_web_driver():
-    caps = DesiredCapabilities().CHROME
-    caps["pageLoadStrategy"] = "eager"
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_driver = webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, chrome_options=chrome_options, desired_capabilities=caps)
-    chrome_driver.set_window_size(1440, 900)  # load desktop version (macbook air res)---
-    return chrome_driver
-
-
 def delete_comma_cents(price):
     return price.split(',')[0]

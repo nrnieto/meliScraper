@@ -1,7 +1,7 @@
 FRAVEGA_WEBSITE = "https://shopping.fravega.com"  # fravega.com redirects to shopping subdomain
 FRAVEGA_WEBSITE_NEXT_PAGE_CLASS = 'ant-pagination-next'
 FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemTitle"
-FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "itemPrice"
+FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "price"
 FRAVEGA_WEBSITE_PRODUCT_INFO_WRAPPER = "infoWrapper"
 FRAVEGA_WEBSITE_SECTIONS = ["/tv-y-video/tv/",
                             "/heladeras-freezers-y-cavas/",
@@ -21,7 +21,7 @@ GARBARINO_WEBSITE = "https://www.garbarino.com"
 GARBARINO_WEBSITE_NEXT_PAGE_CLASS = 'pagination__page'
 GARBARINO_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemBox--title"
 GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "value-note"
-GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE = "value-item "
+GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE = "value-item"
 GARBARINO_WEBSITE_PRODUCT_INFO_WRAPPER = "itemBox--info"
 GARBARINO_WEBSITE_SECTIONS = ["/productos/tv-led-y-smart-tv/4342",
                               "/productos/heladeras-y-freezers/4290",

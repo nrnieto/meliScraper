@@ -5,7 +5,7 @@ import string
 import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, \
-    WebDriverException
+    WebDriverException, StaleElementReferenceException, ElementNotVisibleException
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import time
@@ -39,6 +39,7 @@ def delete_comma_cents(price):
 
 
 def fravega_crawl(url, settings):
+    csvfile = open("report.csv", "a")
     chrome_driver.get(url)
     while True:
         products = dict()
@@ -52,9 +53,14 @@ def fravega_crawl(url, settings):
                 products["discount_price"] = None
             print(products)
             csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
-        if settings["company"] == "fravega" and not check_if_element_exists_by_class_name("ant-pagination-disabled"):
+        if not check_if_element_exists_by_class_name("ant-pagination-disabled"):
+            try:
                 chrome_driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()
+            except NoSuchElementException:
                 time.sleep(2)  # make sure page finishes rendering
+                chrome_driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()
+                csvfile.close()
+                break
         else:
             #  chrome_driver.close()
             csvfile.close()
@@ -63,6 +69,7 @@ def fravega_crawl(url, settings):
 
 def garbarino_crawl(url, settings):
     chrome_driver.get(url)
+    csvfile = open("report.csv", "a")
     while True:
         products = dict()
         products_info_wrapper = chrome_driver.find_elements_by_class_name(settings["info_wrapper"])
@@ -78,20 +85,25 @@ def garbarino_crawl(url, settings):
                 products["discount_price"] = None
             print(products)
             csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
-        if settings["company"] == "fravega" and not check_if_element_exists_by_class_name("ant-pagination-disabled"):
-                chrome_driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()
-                time.sleep(2)  # make sure page finishes rendering
-        else:
-            #  chrome_driver.close()
+        try:    # TODO simplify xpath
+            chrome_driver.find_elements_by_xpath("/html/body/div[4]/div[3]/div[2]/nav/ul/li[4]/a")[0].click()
+        except IndexError:
+            csvfile.close()
             break
 
 
 # Get web page
+print("Fravega")
+csvfile = open("report.csv", "a")
+csvfile.write(FRAVEGA_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
+csvfile.close()
 for section in FRAVEGA_WEBSITE_SECTIONS:
-    csvfile = open("report.csv", "a")
-    csvfile.write(FRAVEGA_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
     fravega_crawl(FRAVEGA_WEBSITE+section, FRAVEGA_CRAWLER_SETTINGS)
-    csvfile = open("report.csv", "a")
-    csvfile.write(GARBARINO_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
+
+
+print("Garbarino")
+csvfile = open("report.csv", "a")
+csvfile.write(GARBARINO_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "discount_price" + "\n")
+csvfile.close()
 for section in GARBARINO_WEBSITE_SECTIONS:
     garbarino_crawl(GARBARINO_WEBSITE+section, GARBARINO_CRAWLER_SETTINGS)

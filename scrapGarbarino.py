@@ -1,23 +1,26 @@
 from main import *
 import time
+from bs4 import BeautifulSoup as BSoup
+import string
 
 
 def garbarino_crawl(garbarino_chrome_driver, url, settings):
     garbarino_chrome_driver.get(url)
     csvfile = open("garbarinoReport.csv", "a")
+    bs_obj = BSoup(garbarino_chrome_driver.page_source, 'lxml')
+    products_info_wrapper = bs_obj.find_all("div", {"class": settings["info_wrapper"]})
     while True:
         products = dict()
         # Find all info wrappers
-        products_info_wrapper = garbarino_chrome_driver.find_elements_by_class_name(settings["info_wrapper"])
         # Iterate though products and get names an prices
         for product in products_info_wrapper:
-            products["name"] = product.find_element_by_class_name(settings["product_name_attribute"]).text
+            products["name"] = product.find("h3", {"class": settings["product_name_attribute"]}).text
             try:
-                products["list_price"] = float(delete_comma_cents(product.find_element_by_class_name(GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE).text.strip("$")).split()[0])
+                products["list_price"] = float(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0]))
             except IndexError:
-                products["list_price"] = float(delete_comma_cents(product.find_element_by_class_name(GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE).text.strip("$")))
+                products["list_price"] = None
             try:
-                products["discount_price"] = float(delete_comma_cents(product.find_element_by_class_name(GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE).text.strip("$")))
+                products["discount_price"] = float(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0]))
             except IndexError:
                 products["discount_price"] = None
             print(products)

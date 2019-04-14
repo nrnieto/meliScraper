@@ -1,4 +1,4 @@
-FRAVEGA_WEBSITE = "https://shopping.fravega.com"  # fravega.com redirects to shopping subdomain
+FRAVEGA_WEBSITE = "https://shopping.fravega.com"  # fravega.com redirects to shopping subdomain  # TODO shopping != fravega.com
 FRAVEGA_WEBSITE_NEXT_PAGE_CLASS = 'ant-pagination-next'
 FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemTitle"
 FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "price"

@@ -1,32 +1,27 @@
-from main import *
+from utils import *
 import time
 from bs4 import BeautifulSoup as BSoup
 
 
 def fravega_crawl(fravega_chrome_driver, url, settings, csvfile):
     fravega_chrome_driver.get(url)
-    bs_obj = BSoup(fravega_chrome_driver.page_source, 'lxml')
-    products_info_wrapper = bs_obj.find_all("div", {"name": settings["info_wrapper"]})
     while True:
-        products = dict()
-        # Find all info wrappers
-        # Iterate though products and get names an prices
+        fravega_chrome_driver.get(fravega_chrome_driver.current_url)
+        bs_obj = BSoup(fravega_chrome_driver.page_source, 'lxml')
+        products_info_wrapper = bs_obj.find_all("div", {"name": settings["info_wrapper"]})
         for product in products_info_wrapper:
+            products = dict()
             products["name"] = product.find("h2", {"name": settings["product_name_attribute"]}).text
-            products["list_price"] = float(delete_comma_cents(product.find("p", {"class": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split("$ ")[1:][0]))
+            products["list_price"] = int(delete_comma_cents(product.find("p", {"class": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split("$ ")[1:][0].replace(".","")))
             try:
-                products["discount_price"] = float(delete_comma_cents(product.find("p", {"class": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split("$ ")[1:][1]))
+                products["discount_price"] = int(delete_comma_cents(product.find("p", {"class": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split("$ ")[1:][1].replace(".","")))
             except IndexError:
-                products["discount_price"] = None
+                products["discount_price"] = products["list_price"]
             print(products)
             csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
-        # Check if next page element exists
+            # Check if next page element exists
         if not check_if_element_exists_by_class_name("ant-pagination-disabled", fravega_chrome_driver):
-            try:
-                # Try clicking it
-                fravega_chrome_driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()
-            except NoSuchElementException:
-                break
+            fravega_chrome_driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()
         else:
             break
 
@@ -44,6 +39,6 @@ csvfile.write(FRAVEGA_CRAWLER_SETTINGS["company"] + "," + "list_price" + "," + "
 for section in FRAVEGA_WEBSITE_SECTIONS:
     fravega_crawl(fravega_chrome_driver, FRAVEGA_WEBSITE+section, FRAVEGA_CRAWLER_SETTINGS, csvfile)
 
-print("Finished Garbarino")
+print("Finished Fravega")
 fravega_chrome_driver.close()
 csvfile.close()

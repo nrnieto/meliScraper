@@ -1,4 +1,4 @@
-from main import *
+from utils import *
 import time
 from bs4 import BeautifulSoup as BSoup
 import string
@@ -6,23 +6,22 @@ import string
 
 def garbarino_crawl(garbarino_chrome_driver, url, settings, csvfile):
     garbarino_chrome_driver.get(url)
-    bs_obj = BSoup(garbarino_chrome_driver.page_source, 'lxml')
-    products_info_wrapper = bs_obj.find_all("div", {"class": settings["info_wrapper"]})
     while True:
         products = dict()
-        # Find all info wrappers
-        # Iterate though products and get names an prices
+        garbarino_chrome_driver.get(garbarino_chrome_driver.current_url)
+        bs_obj = BSoup(garbarino_chrome_driver.page_source, 'lxml')
+        products_info_wrapper = bs_obj.find_all("div", {"class": settings["info_wrapper"]})
         for product in products_info_wrapper:
             products["name"] = product.find("h3", {"class": settings["product_name_attribute"]}).text
             try:
-                products["list_price"] = float(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0]))
+                products["list_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0].replace(".","")))
             except IndexError:
-                products["list_price"] = float(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0]))
-                products["discount_price"] = None
+                products["list_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0].replace(".","")))
+                products["discount_price"] = products["list_price"]
             try:
-                products["discount_price"] = float(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0]))
+                products["discount_price"] = float(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0].replace(".","")))
             except IndexError:
-                products["discount_price"] = None
+                products["discount_price"] = products["list_price"]
             print(products)
             csvfile.write(str(products["name"]) + "," + str(products["list_price"]) + "," + str(products["discount_price"])+ "\n")
         # Try clicking next page element

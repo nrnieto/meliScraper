@@ -1,7 +1,3 @@
-os.environ['HTTPS_PROXY'] = ''
-os.environ['HTTP_PROXY'] = ''
-
-
 FRAVEGA_WEBSITE = "https://shopping.fravega.com"
 FRAVEGA_WEBSITE_NEXT_PAGE_CLASS = 'ant-pagination-next'
 FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemTitle"

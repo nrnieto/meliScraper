@@ -13,7 +13,6 @@ acs = session.query(AC).all()
 
 csvfile = open("acReport.csv", "w")
 
-
 for ac in session.query(AC).order_by(AC.discount_price).order_by(AC.power):
     try:
         csvfile.write(str(ac.discount_price) + "," + str(ac.power) + "F" + "," + ac.brand + "," + str(ac.model) + "," + ac.company + "," + ac.href + "\n")

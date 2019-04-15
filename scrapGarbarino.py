@@ -13,11 +13,10 @@ def garbarino_crawl(driver, url, settings):
         for product in products_info_wrapper:
             product_dict = {"description": product.find("h3", {"class": settings["product_name_attribute"]}).text}
             try:
-                product_dict["list_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0].replace(".","")))
+                product_dict["list_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split()[0].strip("$").replace(".","")))
             except IndexError:
-                product_dict["list_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0].replace(".","")))
+                product_dict["list_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.split()[0].strip("$").replace(".","")))
                 product_dict["discount_price"] = product_dict["list_price"]
-            product_dict["discount_price"] = int(delete_comma_cents(product.find("span", {"class": GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE}).text.strip("$"+string.punctuation+string.whitespace).split()[0].replace(".","")))
             product_dict["company"] = "GARBARINO"
             product_dict["href"] = GARBARINO_CRAWLER_SETTINGS["url"] + product.find_all("a", href=True)[0]["href"]
             product_to_db(product_dict)

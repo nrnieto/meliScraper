@@ -13,7 +13,6 @@ tvs = session.query(TV).all()
 
 csvfile = open("tvReport.csv", "w")
 
-
 for tv in session.query(TV).order_by(TV.size).order_by(TV.discount_price):
     csvfile.write(str(tv.discount_price) + "," + str(tv.size) + "," + tv.model + "," + tv.brand + "," + tv.resolution + "," + tv.company + "," + tv.href + "\n")
 

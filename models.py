@@ -12,7 +12,7 @@ class Product(Base):
     discount_price = Column("discount_price", Integer)
     company = Column("company", String)
 
-    def __init__(self, id, model, brand, list_price, discount_price, company):
+    def __init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None):
         self.id = id
         self.brand = brand
         self.model = model

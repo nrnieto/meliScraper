@@ -54,7 +54,7 @@ def save_tv_to_db(tv):
     try:
         session.commit()
     except IntegrityError:  # repeated element
-        print("Repeated element")
+        print("Element already in DB")
         session.rollback()
 
 

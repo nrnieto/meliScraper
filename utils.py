@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from settings import *
+import os
+
+os.environ['HTTPS_PROXY'] = ''
+os.environ['HTTP_PROXY'] = ''
 
 
 def get_driver():

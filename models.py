@@ -28,7 +28,7 @@ class TV(Product):
     resolution = Column("resolution", String)  # TODO choices
     href = Column("href", String)
 
-    def __init__(self, id, size=None, resolution=None, href=None):
+    def __init__(self, id=None, size=None, resolution=None, href=None):
         Product.__init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None)
         self.size = size
         self.resolution = resolution
@@ -56,7 +56,7 @@ class AC(Product):
     heat = Column("heat", Boolean)
     href = Column("href", String)
 
-    def __init__(self, id, power=None, split=None, heat=None, href=None):
+    def __init__(self, id=None, power=None, split=None, heat=None, href=None):
         Product.__init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None)
         self.power = power
         self.split = split

@@ -6,7 +6,8 @@ FRAVEGA_WEBSITE_PRODUCT_INFO_WRAPPER = "infoWrapper"
 FRAVEGA_WEBSITE_SECTIONS = ["/tv-y-video/tv/",
                             #"/heladeras-freezers-y-cavas/",
                             #"/lavado/",
-                            "/climatizacion/"]
+                            "/climatizacion/"
+                            ]
 
 GARBARINO_WEBSITE = "https://www.garbarino.com"
 GARBARINO_WEBSITE_NEXT_PAGE_CLASS = 'pagination__page'

@@ -16,8 +16,6 @@ def process_tv(product):
         tv = TV()
         tv.brand = ""
         tv.resolution = ""
-        if product["href"] == "https://www.garbarino.com/producto/smart-tv-philips-55-ultra-hd-55oled87377/dae657f4dc":
-            print("H!")
         description_components = string_to_upper_list(product["description"])
         for component in description_components:
             if component in TV_COMMON_WORDS[product["company"]]["BRAND"]:
@@ -76,7 +74,7 @@ def process_ac(product):
             if component in AC_COMMON_WORDS[product["company"]]["BRAND"]:
                 ac.brand += component
                 continue
-            elif component[-1] in AC_COMMON_WORDS[product["company"]]["POWER"]:
+            elif component[-1] in AC_COMMON_WORDS[product["company"]]["POWER"] and len(component[:-1]) != 0:
                 ac.power = component[:-1]
             elif component in AC_COMMON_WORDS[product["company"]]["POWER"]:
                 ac.power = description_components[description_components.index(component)-1]

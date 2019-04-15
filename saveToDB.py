@@ -72,6 +72,8 @@ def process_ac(product):
             if component in AC_COMMON_WORDS[product["company"]]["BRAND"]:
                 ac.brand += component
                 continue
+            elif component[-1] in AC_COMMON_WORDS[product["company"]]["POWER"]:
+                ac.power = component[:-1]
             elif component in AC_COMMON_WORDS[product["company"]]["POWER"]:
                 ac.power = description_components[description_components.index(component)-1]
             elif component in AC_COMMON_WORDS[product["company"]]["SPLIT"]:

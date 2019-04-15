@@ -92,6 +92,7 @@ def process_ac(product):
         ac.id = product["company"]+ac.brand+str(ac.model)+str(ac.power)
         ac.company = product["company"]
         ac.discount_price = product["discount_price"]
+        ac.discount_price = product["discount_price"]
         ac.list_price = product["list_price"]
         ac.href = product["href"]
         save_to_db(ac)

@@ -45,16 +45,16 @@ def product_to_db(product):
         elif component.upper() in AC_COMMON_WORDS[product["company"]]["NAME"]:
             process_ac(product)
             break
-    session.close()
 
 
 def save_tv_to_db(tv):
     session.add(tv)
     try:
         session.commit()
-    except IntegrityError:  # repeated element
-        print("Element already in DB")
+        session.close()
+    except IntegrityError:
         session.rollback()
+        session.close()
 
 
 def string_to_upper_list(description):
@@ -66,6 +66,8 @@ def process_ac(product):
         ac = AC()
         ac.brand = ""
         description_components = string_to_upper_list(product["description"])
+        if "" in description_components:
+            description_components.pop(description_components.index(""))
         for component in description_components:
             if component in AC_COMMON_WORDS[product["company"]]["BRAND"]:
                 ac.brand += component
@@ -78,6 +80,9 @@ def process_ac(product):
                 ac.split = True
             elif component in AC_COMMON_WORDS[product["company"]]["HEAT"]:
                 ac.heat = True
+            else:
+                if "FG" in component:
+                    ac.power = component.strip("FG")
         if description_components[-3] not in AC_COMMON_WORDS[product["company"]]["POWER"] and product["company"] != "GARBARINO":
                 ac.model = description_components[-3]
         else:

@@ -4,8 +4,8 @@ FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemTitle"
 FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "price"
 FRAVEGA_WEBSITE_PRODUCT_INFO_WRAPPER = "infoWrapper"
 FRAVEGA_WEBSITE_SECTIONS = ["/tv-y-video/tv/",
-                            "/heladeras-freezers-y-cavas/",
-                            "/lavado/",
+                            #"/heladeras-freezers-y-cavas/",
+                            #"/lavado/",
                             "/climatizacion/"]
 
 GARBARINO_WEBSITE = "https://www.garbarino.com"
@@ -15,8 +15,8 @@ GARBARINO_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "value-note"
 GARBARINO_WEBSITE_PRODUCT_PRICE_DISCOUNT_ATTRIBUTE = "value-item"
 GARBARINO_WEBSITE_PRODUCT_INFO_WRAPPER = "itemBox--info"
 GARBARINO_WEBSITE_SECTIONS = ["/productos/tv-led-y-smart-tv/4342",
-                              "/productos/heladeras-y-freezers/4290",
-                              "/productos/lavado/4297",
+                              #"/productos/heladeras-y-freezers/4290",
+                              #"/productos/lavado/4297",
                               "/productos/ventilacion-y-calefaccion/4277"
                               ]
 
@@ -72,7 +72,8 @@ AC_COMMON_WORDS = {
                            },
                            "GARBARINO": {
                                "NAME": ["AIRE", "ACONDICIONADO", "SPLIT"],
-                               "BRAND": ["HISENSE", "SURREY", "BGH", "PHILCO", "CARRIER", "ELECTRA", "MIDEA"
+                               "BRAND": ["HISENSE", "SURREY", "BGH", "PHILCO", "CARRIER", "ELECTRA", "MIDEA", "COVENTRY",
+                                         "SAMSUNG", "YORK"
                                          ],
                                "POWER": ["F", "FG", "FRIGORIAS"],
                                "SPLIT": ["SPLIT"],

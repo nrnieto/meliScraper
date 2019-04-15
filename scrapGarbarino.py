@@ -1,6 +1,5 @@
 from utils import *
 from bs4 import BeautifulSoup as BSoup
-import string
 from saveToDB import *
 
 

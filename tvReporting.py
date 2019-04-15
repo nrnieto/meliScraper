@@ -1,5 +1,5 @@
 from models import TV
-from sqlalchemy import create_engine, Column, String, Float, Integer, Boolean, ForeignKey
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -11,8 +11,10 @@ session = Session(bind=engine)
 
 tvs = session.query(TV).all()
 
+csvfile = open("tvReport.csv", "w")
 
-for tv in tvs:
-    if tv.size == 32:
-        print(tv.id)
 
+for tv in session.query(TV).order_by(TV.size).order_by(TV.discount_price):
+    csvfile.write(str(tv.discount_price) + "," + str(tv.size) + "," + tv.model + "," + tv.brand + "," + tv.resolution + "," + tv.company + "," + tv.href + "\n")
+
+csvfile.close()

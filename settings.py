@@ -1,4 +1,8 @@
-FRAVEGA_WEBSITE = "https://shopping.fravega.com"  # fravega.com redirects to shopping subdomain  # TODO shopping != fravega.com
+os.environ['HTTPS_PROXY'] = ''
+os.environ['HTTP_PROXY'] = ''
+
+
+FRAVEGA_WEBSITE = "https://shopping.fravega.com"
 FRAVEGA_WEBSITE_NEXT_PAGE_CLASS = 'ant-pagination-next'
 FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemTitle"
 FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "price"
@@ -7,15 +11,6 @@ FRAVEGA_WEBSITE_SECTIONS = ["/tv-y-video/tv/",
                             "/heladeras-freezers-y-cavas/",
                             "/lavado/",
                             "/climatizacion/"]
-
-FRAVEGA_CRAWLER_SETTINGS = {"company": "FRAVEGA",
-                            "url": FRAVEGA_WEBSITE,
-                            "next_page": FRAVEGA_WEBSITE_NEXT_PAGE_CLASS,
-                            "product_name_attribute": FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE,
-                            "product_price_attribute": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE,
-                            "sections": FRAVEGA_WEBSITE_SECTIONS,
-                            "info_wrapper": FRAVEGA_WEBSITE_PRODUCT_INFO_WRAPPER
-                            }
 
 GARBARINO_WEBSITE = "https://www.garbarino.com"
 GARBARINO_WEBSITE_NEXT_PAGE_CLASS = 'pagination__page'
@@ -38,6 +33,14 @@ GARBARINO_CRAWLER_SETTINGS = {"company": "GARBARINO",
                               "info_wrapper": GARBARINO_WEBSITE_PRODUCT_INFO_WRAPPER,
                               }
 
+FRAVEGA_CRAWLER_SETTINGS = {"company": "FRAVEGA",
+                            "url": FRAVEGA_WEBSITE,
+                            "next_page": FRAVEGA_WEBSITE_NEXT_PAGE_CLASS,
+                            "product_name_attribute": FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE,
+                            "product_price_attribute": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE,
+                            "sections": FRAVEGA_WEBSITE_SECTIONS,
+                            "info_wrapper": FRAVEGA_WEBSITE_PRODUCT_INFO_WRAPPER
+                            }
 
 CHROME_DRIVER_PATH = "/usr/local/bin/chromedriver"
 
@@ -60,11 +63,23 @@ TV_COMMON_WORDS = {
                     }
 }
 
-HELADERA_COMMON_WORDS = {
+
+AC_COMMON_WORDS = {
                            "FRAVEGA": {
-                               "NAME": ["HELADERA"]
+                               "NAME": ["AIRE", "ACONDICIONADO", "SPLIT"],
+                               "BRAND": ["SURREY", "YORK", "BGH", "COVENTRY", "CARRIER", "ELECTRA",
+                                         "SAMSUNG", "MIDEA", "PHILCO", "HISENSE"
+                                         ],
+                               "POWER": ["F", "FG", "FRIGORIAS"],
+                               "SPLIT": ["SPLIT"],
+                               "HEAT": ["FRíO/CALOR", "FRIO/CALOR", "CALOR"]
                            },
                            "GARBARINO": {
-                               "NAME": ["HELADERA"]
+                               "NAME": ["AIRE", "ACONDICIONADO", "SPLIT"],
+                               "BRAND": ["HISENSE", "SURREY", "BGH", "PHILCO", "CARRIER", "ELECTRA", "MIDEA"
+                                         ],
+                               "POWER": ["F", "FG", "FRIGORIAS"],
+                               "SPLIT": ["SPLIT"],
+                               "HEAT": ["FRÍO/CALOR", "FRIO/CALOR", "CALOR"]
                            }
 }

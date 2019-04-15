@@ -1,6 +1,5 @@
-from sqlalchemy import create_engine, Column, String, Float, Integer, Boolean, ForeignKey
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
 
@@ -27,11 +26,13 @@ class TV(Product):
     id = Column(String, ForeignKey("Product.id"),  primary_key=True)
     size = Column("size", Integer)
     resolution = Column("resolution", String)  # TODO choices
+    href = Column("href", String)
 
-    def __init__(self, id, size=None, resolution=None):
+    def __init__(self, id, size=None, resolution=None, href=None):
         Product.__init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None)
         self.size = size
         self.resolution = resolution
+        self.href = href
 
 
 class Heladera(Product):
@@ -40,48 +41,11 @@ class Heladera(Product):
     no_frost = Column("no_frost", Boolean)
     capacity = Column("capacity", Integer)
 
-    def __init__(self, id, model, brand, capacity, no_frost, list_price, discount_price, company):
-        Product.__init__(self, id, brand, model, list_price, discount_price, company)
+    def __init__(self, id, capacity=None, no_frost=None, href=None):
+        Product.__init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None)
         self.capacity = capacity
         self.no_frost = no_frost
-
-
-class Freezer(Product):
-    __tablename__ = 'Freezer'
-    id = Column(String, ForeignKey("Product.id"), primary_key=True)
-    capacity = Column("capacity", Integer)
-
-    def __init__(self, id, model, brand, capacity, list_price, discount_price, company):
-        Product.__init__(self, id, brand, model, list_price, discount_price, company)
-        self.capacity = capacity
-
-
-class Lavarropas(Product):
-    __tablename__ = 'Lavarropas'
-    id = Column(String, ForeignKey("Product.id"), primary_key=True)
-    capacity = Column("capacity", Integer)
-    frontal_load = Column("frontal_load", Boolean)
-    rpm = Column("rpm", Integer)
-
-    def __init__(self, model, brand, capacity, frontal_load, rpm, list_price, discount_price, company):
-        Product.__init__(self, brand, model, list_price, discount_price, company)
-        self.capacity = capacity
-        self.frontal_load = frontal_load
-        self.rpm = rpm
-
-
-class Secarropas(Product):
-    __tablename__ = 'Secarropas'
-    id = Column(String, ForeignKey("Product.id"), primary_key=True)
-    capacity = Column("capacity", Integer)
-    by_heat = Column("by_heat", Boolean)
-    rpm = Column("rpm", Integer)
-
-    def __init__(self, model, brand, capacity, by_heat, rpm, list_price, discount_price, company):
-        Product.__init__(self, brand, model, list_price, discount_price, company)
-        self.capacity = capacity
-        self.by_heat = by_heat
-        self.rpm = rpm
+        self.href = href
 
 
 class AC(Product):
@@ -90,14 +54,11 @@ class AC(Product):
     power = Column("power", Integer)
     split = Column("split", Boolean)
     heat = Column("heat", Boolean)
+    href = Column("href", String)
 
-    def __init__(self, model, brand, power, split, heat, list_price, discount_price, company):
-        Product.__init__(self, brand, model, list_price, discount_price, company)
-        self.brand = brand
-        self.model = model
+    def __init__(self, id, power=None, split=None, heat=None, href=None):
+        Product.__init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None)
         self.power = power
         self.split = split
         self.heat = heat
-        self.list_price = list_price
-        self.discount_price = discount_price
-
+        self.href = href

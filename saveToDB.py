@@ -16,6 +16,8 @@ def process_tv(product):
         tv = TV()
         tv.brand = ""
         tv.resolution = ""
+        if product["href"] == "https://www.garbarino.com/producto/smart-tv-philips-55-ultra-hd-55oled87377/dae657f4dc":
+            print("H!")
         description_components = string_to_upper_list(product["description"])
         for component in description_components:
             if component in TV_COMMON_WORDS[product["company"]]["BRAND"]:
@@ -25,14 +27,14 @@ def process_tv(product):
                 tv.size = int(component.strip('"'))
             elif component in TV_COMMON_WORDS[product["company"]]["RESOLUTION"]:
                 tv.resolution += component
-                if tv.resolution == "4KULTRAHD" or tv.resolution == "4KUHD":
-                    tv.resolution = "4K"
+        if tv.resolution == "4KULTRAHD" or tv.resolution == "4KUHD" or tv.resolution == "ULTRAHD":
+            tv.resolution = "4K"
         tv.model = description_components[-1]
         tv.list_price = product["list_price"]
         tv.discount_price = product["discount_price"]
         tv.company = product["company"]
         tv.href = product["href"]
-        save_tv_to_db(tv)
+        save_to_db(tv)
     except Exception as err:
         print(str(err))
 
@@ -47,13 +49,15 @@ def product_to_db(product):
             break
 
 
-def save_tv_to_db(tv):
-    session.add(tv)
+def save_to_db(element):
+    session.add(element)
     try:
         session.commit()
         session.close()
     except IntegrityError:
         session.rollback()
+        session.query(element).filter_by(id=element.id).update(element)
+        session.commit()
         session.close()
 
 
@@ -92,7 +96,7 @@ def process_ac(product):
         ac.discount_price = product["discount_price"]
         ac.list_price = product["list_price"]
         ac.href = product["href"]
-        save_tv_to_db(ac)
+        save_to_db(ac)
     except Exception as err:
         print(str(err))
 

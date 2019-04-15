@@ -1,0 +1,16 @@
+SQLAlchemy
+beautifulsoup4
+bs4
+certifi
+chardet	3
+gevent
+greenlet
+grequests
+idna
+lxml
+pip
+requests
+selenium
+setuptools
+soupsieve
+urllib3

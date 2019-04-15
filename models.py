@@ -3,8 +3,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
-# TODO inheritance!!!!!
-
 
 class Product(Base):
     __tablename__ = 'Product'
@@ -30,8 +28,8 @@ class TV(Product):
     size = Column("size", Integer)
     resolution = Column("resolution", String)  # TODO choices
 
-    def __init__(self, id, model, brand, size, resolution, list_price, discount_price, company):
-        Product.__init__(self, id, model, brand, list_price, discount_price, company)
+    def __init__(self, id, size=None, resolution=None):
+        Product.__init__(self, id, model=None, brand=None, list_price=None, discount_price=None, company=None)
         self.size = size
         self.resolution = resolution
 

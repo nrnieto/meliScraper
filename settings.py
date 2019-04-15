@@ -40,3 +40,31 @@ GARBARINO_CRAWLER_SETTINGS = {"company": "GARBARINO",
 
 
 CHROME_DRIVER_PATH = "/usr/local/bin/chromedriver"
+
+TV_COMMON_WORDS = {
+                    "FRAVEGA": {
+                        "NAME": ["TV", "SMART", "LED"],
+                        "BRAND": ["SAMSUNG", "KEN", "BROWN", "PHILIPS", "LG", "SONY", "HITACHI", "NOBLEX", "PHILCO", "HISENSE", "RCA", "SANYO", "TELEFUNKEN", "TCL",
+                                  "TOSHIBA", "JVC", "ADMIRAL", "SKYWORTH", "HYUNDAI"
+                                  ],
+                        "SIZE": ['24"', '32"', '42"', '43"', '49"', '50"', '55"', '65"', '75"'],
+                        "RESOLUTION": ["4K", "FULLHD", "FULL", "HD", "ULTRA", "UHD"],
+                    },
+                    "GARBARINO": {
+                        "NAME": ["TV"],
+                        "BRAND": ["SAMSUNG", "KEN", "BROWN", "PHILIPS", "LG", "SONY", "HITACHI", "NOBLEX", "PHILCO", "HISENSE", "RCA", "SANYO", "TELEFUNKEN", "TCL",
+                                  "TOSHIBA", "JVC", "ADMIRAL", "SKYWORTH", "HYUNDAI"
+                                  ],
+                        "SIZE": ['24', '32', '42', '43', '49', '50', '55', '65', '75'],
+                        "RESOLUTION": ["4K", "FULLHD", "FULL", "HD", "ULTRA", "UHD"]
+                    }
+}
+
+HELADERA_COMMON_WORDS = {
+                           "FRAVEGA": {
+                               "NAME": ["HELADERA"]
+                           },
+                           "GARBARINO": {
+                               "NAME": ["HELADERA"]
+                           }
+}

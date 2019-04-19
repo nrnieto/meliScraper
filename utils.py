@@ -1,5 +1,5 @@
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, NoSuchAttributeException, WebDriverException, TimeoutException
 from selenium.webdriver.chrome.options import Options
 from settings import *
 import os
@@ -12,6 +12,7 @@ def get_driver():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_driver = webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, chrome_options=chrome_options)
+    chrome_driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
     chrome_driver.set_window_size(1440, 900)  # load desktop version (macbook air res)---
     return chrome_driver
 

@@ -12,8 +12,7 @@ session = Session(bind=engine)
 tvs = session.query(TV).all()
 
 csvfile = open("./samples/tvReport.csv", "w")
-csvfile.write("DISCOUNT_PRICE" + "," + "LIST_PRICE" + "," + "SIZE" + "," + "BRAND" + "," + "RESOLUTION" + "," + "COMPANY" + "," + "LINK" + "\n")
+csvfile.write("DISCOUNT_PRICE" + "," + "LIST_PRICE" + "," + "SIZE" + "," + "BRAND" + "," + "RESOLUTION" + "," + "MODEL" + "," + "COMPANY" + "," + "LINK" + "\n")
 for tv in session.query(TV).order_by(TV.size).order_by(TV.discount_price):
-    csvfile.write(str(tv.discount_price) + "," + str(tv.list_price) + "," + str(tv.size) + "," + tv.brand + "," + tv.resolution + "," + tv.company + "," + tv.href + "\n")
-
+    csvfile.write(str(tv.discount_price) + "," + str(tv.list_price) + "," + str(tv.size) + "," + tv.brand + "," + tv.resolution + "," + tv.model + "," + tv.company + "," + tv.href + "\n")
 csvfile.close()

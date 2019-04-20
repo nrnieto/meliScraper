@@ -22,7 +22,7 @@ class Product(Base):
         self.list_price = list_price
         self.discount_price = discount_price
         self.company = company
-        self.timestamp = time.time()
+        self.timestamp = int(time.time())
 
 
 class TV(Product):

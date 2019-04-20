@@ -4,7 +4,6 @@ DISCOUNT_PRICE,LIST_PRICE,SIZE,BRAND,RESOLUTION,MODEL,COMPANY,LINK
 7999,11999,32,RCA,HD,L32NXTSMART,FRAVEGA,https://shopping.fravega.com/p/smart-tv-32-hd-rca-l32nxtsmart-502133
 7999,10999,32,KENBROWN,HD,KB32S2000SAS,FRAVEGA,https://shopping.fravega.com/p/smart-tv-32-hd-ken-brown-kb32s2000sas-501593
 7999,9999,32,HITACHI,HD,CDHLE32FD21,FRAVEGA,https://shopping.fravega.com/p/tv-led-32-hd-hitachi-cdh-le32fd21-502143
-7999,9999,32,RCA,HD,L32NXSMART,FRAVEGA,https://shopping.fravega.com/p/smart-tv-32-hd-rca-l32nxsmart-501990
 8999,11999,32,PHILCO,HD,PLD32HS8B,GARBARINO,https://www.garbarino.com/producto/smart-tv-philco-32-hd-pld32hs8b/573937a69d
 9399,9999,32,TOSHIBA,HD,L4700,FRAVEGA,https://shopping.fravega.com/p/netflix-tv-32--hd-toshiba-l4700-501819
 9499,10999,32,HITACHI,HD,CDHLE32SMART14,GARBARINO,https://www.garbarino.com/producto/smart-tv-hitachi-32-hd-cdh-le32smart14/2f540c4c65
@@ -27,10 +26,10 @@ DISCOUNT_PRICE,LIST_PRICE,SIZE,BRAND,RESOLUTION,MODEL,COMPANY,LINK
 14999,19999,43,PHILIPS,FULLHD,43PFG5813/77,GARBARINO,https://www.garbarino.com/producto/smart-tv-philips-43-full-hd-43pfg581377/9ef586dbf7
 14999,None,43,HISENSE,FULLHD,HLE4317RTF,GARBARINO,https://www.garbarino.com/producto/smart-tv-hisense-43-full-hd-hle4317rtf/66f1589c8e
 14999,19999,43,PHILIPS,FULLHD,43PFG5813/77,FRAVEGA,https://shopping.fravega.com/p/smart-tv-43-full-hd-philips-43pfg5813-77-502417
-14999,15999,43,TOSHIBA,FULLHD,L4700,FRAVEGA,https://shopping.fravega.com/p/netflix-tv-43--full-hd-toshiba-l4700-501830
 14999,15999,43,NOBLEX,FULLHD,EA43X5100,FRAVEGA,https://shopping.fravega.com/p/smart-tv-43--full-hd-noblex-ea43x5100-501597
 14999,16999,43,ADMIRAL,FULLHD,AD43E2,FRAVEGA,https://shopping.fravega.com/p/smart-tv-43--full-hd-admiral-ad43e2-501918
-14999,18999,43,HYUNDAIHYUNDAI,4K,HYLED43UHD,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-uhd-hyundai-hyled-43uhd-501867
+14999,18999,43,HYUNDAI,4K,HYLED43UHD,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-uhd-hyundai-hyled-43uhd-501867
+14999,15999,43,TOSHIBA,FULLHD,L4700,FRAVEGA,https://shopping.fravega.com/p/netflix-tv-43--full-hd-toshiba-l4700-501830
 14999,15999,43,HISENSE,FULLHD,HLE4317RTF,FRAVEGA,https://shopping.fravega.com/p/smart-tv-led-43--full-hd-hisense-hle4317rtf-501947
 15999,23999,43,LG,FULLHD,43LK5700PSC,GARBARINO,https://www.garbarino.com/producto/smart-tv-lg-43-full-hd-43lk5700psc/d25a2b92af
 15999,19999,43,SAMSUNG,FULLHD,UN43J5290FV,FRAVEGA,https://shopping.fravega.com/p/smart-tv-43--full-hd-samsung-un43j5290fv-501755
@@ -48,7 +47,7 @@ DISCOUNT_PRICE,LIST_PRICE,SIZE,BRAND,RESOLUTION,MODEL,COMPANY,LINK
 17999,24999,49,PHILIPS,FULLHD,49PFG5102/77,GARBARINO,https://www.garbarino.com/producto/smart-tv-philips-49-full-hd-49pfg510277/432c76aba6
 17999,24999,49,PHILIPS,FULLHD,49PFG5102/77,FRAVEGA,https://shopping.fravega.com/p/smart-tv-49--full-hd-philips-49pfg5102-77-501691
 18999,19999,49,HISENSE,FULLHD,HLE4917RTF,FRAVEGA,https://shopping.fravega.com/p/smart-tv-led-49--full-hd-hisense-hle4917rtf-501720
-18999,21999,49,HYUNDAIHYUNDAI,4K,HYLED49UHD2,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-uhd-hyundai-hyled-49uhd2-501844
+18999,21999,49,HYUNDAI,4K,HYLED49UHD2,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-uhd-hyundai-hyled-49uhd2-501844
 19999,24999,49,SAMSUNG,FULLHD,UN49K5500,FRAVEGA,https://shopping.fravega.com/p/smart-tv-full-hd-49-samsung-un49k5500-501989
 19999,24999,49,TOSHIBA,4K,U4700,FRAVEGA,https://shopping.fravega.com/p/netflix-tv-4k-49--toshiba-u4700-501842
 21999,28999,49,LG,FULLHD,49LK5700PSC,GARBARINO,https://www.garbarino.com/producto/smart-tv-lg-49-full-hd-49lk5700psc/dc7898b279
@@ -78,7 +77,7 @@ DISCOUNT_PRICE,LIST_PRICE,SIZE,BRAND,RESOLUTION,MODEL,COMPANY,LINK
 44999,68749,55,SONY,4K,XBR55X805E,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-55-sony-xbr55x805e-10010152
 47999,59999,55,PHILIPS,4K,55PUG8513/77,GARBARINO,https://www.garbarino.com/producto/smart-tv-philips-55-4k-ultra-hd-55pug851377/0de708b14c
 49999,59999,55,PHILIPS,4K,55OLED873/77,GARBARINO,https://www.garbarino.com/producto/smart-tv-philips-55-4k-ultra-hd-55oled87377/dae657f4dc
-39999,49999,60,HYUNDAIHYUNDAI,4K,HYLED60UHD,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-uhd-hyundai-hyled-60uhd-501887
+39999,49999,60,HYUNDAI,4K,HYLED60UHD,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-uhd-hyundai-hyled-60uhd-501887
 42999,49999,65,TCL,4K,L65P6,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-65-tcl-l65p6-501832
 49999,64999,65,PHILIPS,4K,65PUG6703/77,GARBARINO,https://www.garbarino.com/producto/smart-tv-philips-65-4k-ultra-hd-65pug670377/00f5b8a890
 54999,69999,65,SAMSUNG,4K,UN65MU6100,FRAVEGA,https://shopping.fravega.com/p/smart-tv-4k-65--samsung-un65mu6100-501738

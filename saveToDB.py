@@ -1,13 +1,8 @@
 from models import *
-from sqlalchemy.exc import IntegrityError
 from settings import TV_COMMON_WORDS, AC_COMMON_WORDS, RESOLUTION_DICT
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
-import requests
-from bs4 import BeautifulSoup as BSoup
-import re
-from utils import get_driver
 
 
 engine = create_engine('sqlite:///products.db')
@@ -20,6 +15,11 @@ session = Session(bind=engine)
 
 
 def populate_tv_object(product):
+    """
+
+    :param product:
+    :return: populated tv object
+    """
     tv = TV()
     list_of_tv_attributes = [attribute for attribute in dir(tv) if
                              not attribute.startswith("_") and attribute != "metadata" and attribute != "timestamp"]
@@ -32,6 +32,11 @@ def populate_tv_object(product):
 
 
 def populate_ac_object(product):
+    """
+
+    :param product:
+    :return: ac object
+    """
     ac = AC()
     list_of_ac_attributes = [attribute for attribute in dir(ac) if
                              not attribute.startswith("_") and attribute != "metadata" and attribute != "timestamp" and attribute != "model"]
@@ -43,7 +48,12 @@ def populate_ac_object(product):
     return ac
 
 
-def process_hyundai_tv(product):  # workaround!!!!!
+def process_hyundai_tv(product):
+    """
+
+    :param product:
+    :return: tv object
+    """
     description_components = string_to_upper_list(product["description"])
     tv = TV()
     list_of_tv_attributes = [attribute for attribute in dir(tv) if not attribute.startswith("_") and attribute != "metadata" and attribute != "timestamp"]
@@ -54,10 +64,15 @@ def process_hyundai_tv(product):  # workaround!!!!!
     product["id"] = product["href"].split("-")[-1]
     for attribute in list_of_tv_attributes:
         setattr(tv, attribute, product[attribute])
-    save_tv_to_db(tv)
+    return tv
 
 
 def process_tv(product):
+    """
+
+    :param product:
+    :return: tv object
+    """
     try:
         product["brand"] = str()
         product["resolution"] = str()
@@ -65,7 +80,7 @@ def process_tv(product):
         for component in description_components:
             if component in TV_COMMON_WORDS[product["company"]]["BRAND"]:
                 if component == "HYUNDAI":
-                    process_hyundai_tv(product)
+                    return process_hyundai_tv(product)
                 product["brand"] += component
             elif component in TV_COMMON_WORDS[product["company"]]["SIZE"]:
                 product["size"] = int(component.strip('"').strip('”'))
@@ -128,14 +143,18 @@ def string_to_upper_list(description):
 
 
 def process_ac(product):
+    """
+
+    :param product:
+    :return: ac object
+    """
     try:
-        product["brand"] = str()
         description_components = string_to_upper_list(product["description"])
         if "" in description_components:
             description_components.remove("")
         for component in description_components:
             if component in AC_COMMON_WORDS[product["company"]]["BRAND"]:
-                if product["brand"]:
+                if "brand" in product:
                     product["brand"] += component
                 else:
                     product["brand"] = component
@@ -156,3 +175,11 @@ def process_ac(product):
         return ac
     except Exception as err:
         raise err
+
+
+def is_power(string):
+    try:
+        int(string)
+        return True
+    except ValueError:
+        return False

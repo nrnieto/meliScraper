@@ -29,7 +29,7 @@ def fravega_crawl(driver, url, settings):
             except IndexError:
                 product_dict["discount_price"] = product_dict["list_price"]
             product_dict["company"] = "FRAVEGA"
-            product_dict["href"] = FRAVEGA_CRAWLER_SETTINGS["url"] + product.parent["href"]
+            product_dict["href"] = "https://www.fravega.com/" + product.parent["href"].strip("/p") + "/p"  # shopping workaound
             products.append(product_dict)
         if not check_if_element_exists_by_class_name("ant-pagination-disabled", driver):
             driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()

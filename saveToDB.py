@@ -89,7 +89,7 @@ def process_tv(product):
         if product["resolution"] in RESOLUTION_DICT["4K"]:
             product["resolution"] = "4K"
         product["model"] = description_components[-1].replace("-", "")
-        product["id"] = product["href"].split("-")[-1]
+        product["id"] = product["href"].split("-")[-1].strip("/p")
         tv = populate_tv_object(product)
         return tv
     except Exception as err:
@@ -170,16 +170,8 @@ def process_ac(product):
                     product["power"] = component.strip("FG")
         if description_components[-3] not in AC_COMMON_WORDS[product["company"]]["POWER"] and product["company"] != "GARBARINO":
             product["model"] = description_components[-3].replace("-", "")
-        product["id"] = product["href"].split("-")[-1]
+        product["id"] = product["href"].split("-")[-1].strip("/p")
         ac = populate_ac_object(product)
         return ac
     except Exception as err:
         raise err
-
-
-def is_power(string):
-    try:
-        int(string)
-        return True
-    except ValueError:
-        return False

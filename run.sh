@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "\e[1m\e[32mStarting to crawl/scrap\e[0m"
+echo -e "\e[1m\e[32mCrawling/Scraping\e[0m"
 python3 scrapFravega.py &
 python3 scrapGarbarino.py &
 wait

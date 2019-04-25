@@ -3,7 +3,7 @@ from settings import TV_COMMON_WORDS, AC_COMMON_WORDS, RESOLUTION_DICT
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
-
+import string
 
 engine = create_engine('sqlite:///products.db')
 try:
@@ -139,7 +139,7 @@ def save_ac_to_db(element):
 
 
 def string_to_upper_list(description):
-    return list(map(lambda x: x.upper(), (description.split(" "))))
+    return list(map(lambda x: x.upper().strip(string.punctuation).strip("”"), (description.split(" "))))
 
 
 def process_ac(product):
@@ -169,7 +169,7 @@ def process_ac(product):
                 if "FG" in component:
                     product["power"] = component.strip("FG")
         if description_components[-3] not in AC_COMMON_WORDS[product["company"]]["POWER"] and product["company"] != "GARBARINO":
-            product["model"] = description_components[-3].replace("-", "")
+            product["model"] = description_components[-2].replace("-", "")
         product["id"] = product["href"].split("-")[-1].strip("/p")
         ac = populate_ac_object(product)
         return ac

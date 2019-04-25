@@ -5,36 +5,31 @@ from selenium.common.exceptions import WebDriverException
 
 
 def fravega_crawl(driver, url, settings):
-    """
-    Crawls and returns list of products
-    :param driver: driver object
-    :param url: base url + section
-    :param settings: crawler settings
-    :return: list of products
-    :return:
-    """
+    i=1
     products = list()
     try:
-        driver.get(url)
+        driver.get(url + "#" + str(i))
     except WebDriverException:
         raise WebDriverException(settings[ERR_MSG["GET_URL"]])
-    while True:
+    bs_obj = BSoup(driver.page_source, 'lxml')
+    pages = bs_obj.find("div", {"class": "pager bottom"}).find_all("li", {"class": "page-number"})
+    for page in pages:
+        driver.get(url + "#" + str(i))
+        driver.refresh()
         bs_obj = BSoup(driver.page_source, 'lxml')
-        products_info_wrapper = bs_obj.find_all("div", {"name": settings["info_wrapper"]})
+        products_info_wrapper = bs_obj.find_all("div", {"class": "wrapData"})
         for product in products_info_wrapper:
-            product_dict = {"description": product.find("h2", {"name": settings["product_name_attribute"]}).text}
-            product_dict["list_price"] = int(delete_comma_cents(product.find("p", {"class": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split("$ ")[1:][0].replace(".","")))
+            product_dict = {"description": product.find("h2").text}
+            product_dict["list_price"] = int(delete_comma_cents(product.find("em", {"class": "ListPrice"}).text.split("$ ")[1:][0].replace(".","")))
             try:
-                product_dict["discount_price"] = int(delete_comma_cents(product.find("p", {"class": FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE}).text.split("$ ")[1:][1].replace(".","")))
+                product_dict["discount_price"] = int(delete_comma_cents(product.find("em", {"class": "BestPrice"}).text.split("$ ")[1:][0].replace(".", "")))
             except IndexError:
                 product_dict["discount_price"] = product_dict["list_price"]
             product_dict["company"] = "FRAVEGA"
-            product_dict["href"] = "https://www.fravega.com/" + product.parent["href"].strip("/p") + "/p"  # shopping workaound
+            product_dict["href"] = product.find("a")["href"]
             products.append(product_dict)
-        if not check_if_element_exists_by_class_name("ant-pagination-disabled", driver):
-            driver.find_element_by_class_name(FRAVEGA_WEBSITE_NEXT_PAGE_CLASS).click()
-        else:
-            return products
+        i += 1
+    return products
 
 
 fravega_chrome_driver = get_driver()

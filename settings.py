@@ -3,7 +3,7 @@ ERR_MSG = {"GET_URL": "ERROR GETTING URL",
 
 PAGE_LOAD_TIMEOUT = 15
 
-FRAVEGA_WEBSITE = "https://shopping.fravega.com"
+FRAVEGA_WEBSITE = "https://www.fravega.com"
 FRAVEGA_WEBSITE_NEXT_PAGE_CLASS = 'ant-pagination-next'
 FRAVEGA_WEBSITE_PRODUCT_NAME_ATTRIBUTE = "itemTitle"
 FRAVEGA_WEBSITE_PRODUCT_PRICE_ATTRIBUTE = "price"
@@ -48,7 +48,7 @@ TV_COMMON_WORDS = {
                         "BRAND": ["SAMSUNG", "KEN", "BROWN", "PHILIPS", "LG", "SONY", "HITACHI", "NOBLEX", "PHILCO", "HISENSE", "RCA", "SANYO", "TELEFUNKEN", "TCL",
                                   "TOSHIBA", "JVC", "ADMIRAL", "SKYWORTH", "HYUNDAI"
                                   ],
-                        "SIZE": ['24"', '32"', '32”', '40"', '42"', '43"', '49"', '50"', '55"', '65"', '75"'],
+                        "SIZE": ['24', '32', '32”', '40', '42', '43', '49', '50', '55', '65', '75'],
                         "RESOLUTION": ["4K", "FULLHD", "FULL", "HD", "ULTRA", "UHD"],
                     },
                     "GARBARINO": {
@@ -71,7 +71,7 @@ AC_COMMON_WORDS = {
                                          ],
                                "POWER": ["F", "FG", "FRIGORIAS"],
                                "SPLIT": ["SPLIT"],
-                               "HEAT": ["FRíO/CALOR", "FRIO/CALOR", "CALOR"]
+                               "HEAT": ["FRíO/CALOR", "FRIO/CALOR", "CALOR", "FRIOCALOR", "FRÍO/CALOR"]
                            },
                            "GARBARINO": {
                                "NAME": ["SPLIT"],
@@ -80,6 +80,6 @@ AC_COMMON_WORDS = {
                                          ],
                                "POWER": ["F", "FG", "FRIGORIAS"],
                                "SPLIT": ["SPLIT"],
-                               "HEAT": ["FRÍO/CALOR", "FRIO/CALOR", "CALOR"]
+                               "HEAT": ["FRÍO/CALOR", "FRIO/CALOR", "CALOR", "FRIOCALOR", "FRÍO/CALOR"]
                            }
 }

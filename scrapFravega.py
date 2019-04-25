@@ -2,15 +2,25 @@ from utils import *
 from bs4 import BeautifulSoup as BSoup
 from saveToDB import *
 from selenium.common.exceptions import WebDriverException
+import requests
 
+sections = list()
 
-def fravega_crawl(driver, url, settings):
-    i=1
+FRAVEGA_TV_SITEMAP = "https://www.fravega.com/sitemap-category-1000004-tv.xml"
+FRAVEGA_AC_SITEMAP = "https://www.fravega.com/sitemap-category-1000129-aire-acondicionado.xml"
+
+tv_bs_obj = BSoup(requests.get(FRAVEGA_TV_SITEMAP).content, 'lxml')
+sections.append(tv_bs_obj.find("loc").text)
+ac_bs_obj = BSoup(requests.get(FRAVEGA_AC_SITEMAP).content, 'lxml')
+sections.append(ac_bs_obj.find("loc").text)
+
+def fravega_crawl(driver, url):
+    i = 1
     products = list()
     try:
         driver.get(url + "#" + str(i))
-    except WebDriverException:
-        raise WebDriverException(settings[ERR_MSG["GET_URL"]])
+    except WebDriverException as err:
+        raise WebDriverException(str(err))
     bs_obj = BSoup(driver.page_source, 'lxml')
     pages = bs_obj.find("div", {"class": "pager bottom"}).find_all("li", {"class": "page-number"})
     for page in pages:
@@ -33,9 +43,9 @@ def fravega_crawl(driver, url, settings):
 
 
 fravega_chrome_driver = get_driver()
-for section in FRAVEGA_WEBSITE_SECTIONS:
+for section in sections:
     try:
-        products = fravega_crawl(fravega_chrome_driver, FRAVEGA_WEBSITE+section, FRAVEGA_CRAWLER_SETTINGS)
+        products = fravega_crawl(fravega_chrome_driver, section)
         for product in products:
             process_and_save_to_db(product)
     except WebDriverException:

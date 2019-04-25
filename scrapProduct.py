@@ -29,9 +29,11 @@ tv_urls = session.query(TV.href).all()
 print(len(ac_urls)+len(tv_urls), "products")
 start_time = time.time()
 acs = (grequests.get(u[0]) for u in ac_urls)
-print(grequests.map(acs))
+mapped_acs = grequests.map(acs)
 tvs = (grequests.get(u[0]) for u in tv_urls)
 mapped_tvs = grequests.map(tvs)
+
+print(mapped_acs, mapped_tvs)
 
 only_product_title = SoupStrainer("h1")
 for tv in mapped_tvs:
@@ -42,6 +44,13 @@ for tv in mapped_tvs:
     else:
         print(tree.xpath('//*[contains(@class, "productName")]')[0].text)
 
+for tv in mapped_acs:
+    tree = fromstring(str(tv.content))
+    fixed_html = tostring(tree, pretty_print=True)
+    if tree.xpath("//h1")[0].text:
+        print(tree.xpath("//h1")[0].text)
+    else:
+        print(tree.xpath('//*[contains(@class, "productName")]')[0].text)
+
 print(int(time.time()-start_time), "seconds")
-print(len(ac_urls)+len(tv_urls)//int(time.time()-start_time), "url/sec")
 
